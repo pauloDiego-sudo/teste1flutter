@@ -37,15 +37,13 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
+  final _suggestions =
+      <WordPair>[]; // salva as palavras formadas juntas, em um array
+  final _saved = <WordPair>{}; //salva a palavra favoritada
+  final _biggerFont = const TextStyle(fontSize: 18); //aumenta a fonte
+  // o widget retorna um par de palavras aletórias do inglês, com cada palavra começando com letra maiúscula
   @override
   Widget build(BuildContext context) {
-    final wordPair =
-        WordPair.random(); //duas palavras aleatórias são colocadas juntas
-    final _suggestions =
-        <WordPair>[]; // salva as palavras formadas juntas, em um array
-    final _saved = <WordPair>{}; //salva a palavra favoritada
-    final _biggerFont = const TextStyle(fontSize: 18); //aumenta a fonte
-    // o widget retorna um par de palavras aletórias do inglês, com cada palavra começando com letra maiúscula
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemBuilder: /*1*/ (context, i) {
@@ -70,6 +68,7 @@ class _RandomWordsState extends State<RandomWords> {
             semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
           ),
           onTap: () {
+            //adicionando interação com o ícone
             setState(() {
               if (alreadySaved) {
                 _saved.remove(_suggestions[index]);
